@@ -4,21 +4,21 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
-export default class UserList extends Component {
+export default class BookList extends Component {
 
   constructor(props){
     super(props)
 
     this.state = {
-      users: []
+      books: []
     };
   }
 
   componentDidMount(){
-    axios.get('http://localhost:4000/users')
+    axios.get('http://localhost:4000/books')
       .then(res=>{
         this.setState({
-          users: res.data
+          books: res.data
         });
         console.log(res.data);
       })
@@ -32,22 +32,22 @@ export default class UserList extends Component {
       <table>
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Access Level</th>
+            <th>Isbn</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>Pages</th>
           </tr>
         </thead>
         <tbody>
-          {(this.state.users.length > 0) ? this.state.users.map((user, index) => {
+          {(this.state.books.length > 0) ? this.state.books.map((book, index) => {
             return(
               <tr key={index}>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>{user.accessLevel}</td>
+                <td>{book.isbn}</td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td>{book.publishedDate}</td>
+                <td>{book.pages}</td>
               </tr>
             )
           }) : <tr><td colSpan="10">Loading...</td></tr>}
