@@ -1,40 +1,44 @@
-let express = require('express');
-let mongoose = require('mongoose');
-let cors = require('cors');
-let bodyParser = require('body-parser');
-let dbConfig = require('./database/db');
+let express = require("express");
+let mongoose = require("mongoose");
+let cors = require("cors");
+let bodyParser = require("body-parser");
+let dbConfig = require("./database/db");
 
 // Express Route
-const userRoute = require('./routes/userRoute')
-const bookRoute = require('./routes/bookRoute')
+const userRoute = require("./routes/userRoute");
+const bookRoute = require("./routes/bookRoute");
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
-  useNewUrlParser: true
-}).then(() => {
-  console.log('Database sucessfully connected!')
-},
-  error => {
-    console.log('Could not connect to database : ' + error)
-  }
-)
+mongoose
+  .connect(dbConfig.db, {
+    useNewUrlParser: true,
+  })
+  .then(
+    () => {
+      console.log("Database sucessfully connected!");
+    },
+    (error) => {
+      console.log("Could not connect to database : " + error);
+    }
+  );
 
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(cors());
-app.use('/users', userRoute)
-app.use('/books', bookRoute)
-
+app.use("/users", userRoute);
+app.use("/books", bookRoute);
 
 // PORT
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
-  console.log('Connected to port ' + port)
-})
+  console.log("Connected to port " + port);
+});
 
 // 404 Error
 app.use((req, res, next) => {
