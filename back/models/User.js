@@ -15,8 +15,10 @@ let userSchema = new Schema(
     password: {
       type: String,
     },
-    accessLevel: {
+    role: {
       type: String,
+      enum: ['Authorizer', 'Employee', 'Client'],
+      default: 'Client'
     },
   },
   {

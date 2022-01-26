@@ -2,7 +2,20 @@ import React, { Component } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import MenuItem from '@mui/material/MenuItem';
 import axios from "axios";
+
+const userRoles = [
+  {
+    value: 'Authorizer'
+  },
+  {
+    value: 'Employee'
+  },
+  {
+    value: 'Client'
+  }
+];
 
 export default class Register extends Component {
   constructor(props) {
@@ -13,7 +26,7 @@ export default class Register extends Component {
     this.onChangeLastName = this.onChangeLastName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangeAccessLevel = this.onChangeAccessLevel.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     //setting up state
@@ -22,7 +35,7 @@ export default class Register extends Component {
       lastName: "",
       email: "",
       password: "",
-      accessLevel: "",
+      role: "",
     };
   }
 
@@ -42,8 +55,8 @@ export default class Register extends Component {
     this.setState({ password: e.target.value });
   }
 
-  onChangeAccessLevel(e) {
-    this.setState({ accessLevel: e.target.value });
+  onChangeRole(e) {
+    this.setState({ role: e.target.value });
   }
 
   onSubmit(e) {
@@ -55,7 +68,7 @@ export default class Register extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      accessLevel: this.state.accessLevel,
+      role: this.state.role,
     };
 
     console.log(userObject);
@@ -68,7 +81,7 @@ export default class Register extends Component {
       lastName: "",
       email: "",
       password: "",
-      accessLevel: "",
+      role: "",
     });
   }
 
@@ -112,11 +125,17 @@ export default class Register extends Component {
               onChange={this.onChangeEmail}
             />
             <TextField
-              required
-              label="Access Level"
-              value={this.state.accessLevel}
-              onChange={this.onChangeAccessLevel}
-            />
+          select
+          label="User Role"
+          onChange={this.onChangeRole}
+          helperText="Select User Role"
+        >
+          {userRoles.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.value}
+            </MenuItem>
+          ))}
+        </TextField>
           </div>
         </Box>
         <Button variant="contained" size="large" onClick={this.onSubmit}>

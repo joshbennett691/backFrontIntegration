@@ -21,6 +21,15 @@ export default function Appbar() {
             <Link to="/about" style={{ textDecoration: "none" }}>
               <Button color="inherit">About</Button>
             </Link>
+            <Link to="/new-book" style={{ textDecoration: "none" }}>
+              <Button color="inherit">Add Book</Button>
+            </Link>
+            <Link to="/books" style={{ textDecoration: "none" }}>
+              <Button color="inherit">View Books</Button>
+            </Link>
+            <Link to="/users" style={{ textDecoration: "none" }}>
+              <Button color="inherit">View Users</Button>
+            </Link>
             <Link to="/register" style={{ textDecoration: "none" }}>
               <Button color="inherit">Register</Button>
             </Link>
